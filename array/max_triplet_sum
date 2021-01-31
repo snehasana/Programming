@@ -1,0 +1,22 @@
+public class Solution {
+    public int solve(int[] A) {
+        TreeSet<Integer>st= new TreeSet<Integer>();
+        int []suffixMax= new int[A.length+1];
+        suffixMax[A.length]=0;
+        for(int i=A.length-1;i>=0;i--){
+            suffixMax[i]=Math.max(suffixMax[i+1],A[i]);
+        }
+        int maxElement=0;
+        st.add(Integer.MIN_VALUE);
+        for(int i=0;i<A.length-1;i++){
+            if(suffixMax[i+1]>A[i]){
+                int val=st.lower(A[i]);   //treeset.lower()  returns the greatest from set strictly less than the given element.
+                maxElement=Math.max(suffixMax[i+1]+A[i]+val,maxElement);
+            }
+            st.add(A[i]);
+        }
+        return maxElement;
+        
+    }
+}
+
