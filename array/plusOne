@@ -1,0 +1,50 @@
+import java.lang.*;
+import java.io.*;
+public class Solution {
+    public static int[] plusOne(int[] A) {
+    int carry = 1;
+    int n = A.length;
+    int value,sum;
+    int[] result = new int[n+1];  // output array
+    for(int i =n-1;i>=0;i--){
+    sum = (A[i]+carry);
+    value = sum%10;
+    carry = sum/10;
+    result[i+1] = value;
+    
+    }
+    
+    if( carry !=0){
+    result[0] = carry;
+    
+    }
+    // counter to count number of leading zeroes
+    int counter =0;
+    
+    for(int k =0;k<result.length;k++)
+    {
+    if(result[k]!=0){
+    break;}
+    counter++;
+    }
+    //create new array if  number of leading zeros >0
+    if(counter>0){
+    int[] resarr= new int[result.length-counter];
+    for(int i=0; i<result.length-counter;i++){
+    resarr[i] = result[i+counter];
+    }
+    return resarr;
+    }
+    return result;
+    }
+    
+    
+    
+    
+    public static void main(String args[])
+    {
+        int A[] = {0, 0, 9, 9,9 , 9, 9 };
+        
+        System.out.println(java.util.Arrays.toString(plusOne(A)));
+    }
+}
