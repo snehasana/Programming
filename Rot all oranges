@@ -1,0 +1,128 @@
+import java.util.LinkedList;
+import java.util.Queue;
+class MinimumTimeRequiredToRotAllOranges {
+    private static int minTimeToRot(int[][] mat) {
+        int n = mat.length;
+        int m = mat[0].length;
+        // create a queue to store coordinates
+        Queue<Coordinate> queue = new LinkedList<>();
+        // initialize a variable time as 0
+        int time = 0;
+        // Add all the rotten oranges coordinates to the queue
+        // these acts as the starting point of the BFS
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == 2) {
+                    queue.add(new Coordinate(i, j));
+                }
+            }
+        }
+        while (!queue.isEmpty()) {
+            // initialise size as size of queue
+            int size = queue.size();
+            // boolean variable representing whether or not an orange
+            // is rotten in this time unit
+            boolean isSomeFreshRotten = false;
+            for (int i = 0; i < size; i++) {
+                // remove an element from the queue
+                Coordinate curr = queue.poll();
+                // generate the coordinates of adjacent cells
+                // if the generated coordinates are valid and there is a fresh orange
+                // add the generated coordinates to the queue and mark that orange as rotten
+                // left adjacent
+                int leftRow = curr.row - 1;
+                int leftCol = curr.col;
+                if ((leftRow >= 0 && leftRow < n) && (leftCol >= 0 && leftCol < m)) {
+                    if (mat[leftRow][leftCol] == 1) {
+                        queue.add(new Coordinate(leftRow, leftCol));
+                        mat[leftRow][leftCol] = 2;
+                        isSomeFreshRotten = true;
+                    }
+                }
+                // right adjacent
+                int rightRow = curr.row + 1;
+                int rightCol = curr.col;
+                if ((rightRow >= 0 && rightRow < n) && (rightCol >= 0 && rightCol < m)) {
+                    if (mat[rightRow][rightCol] == 1) {
+                        queue.add(new Coordinate(rightRow, rightCol));
+                        mat[rightRow][rightCol] = 2;
+                        isSomeFreshRotten = true;
+                    }
+                }
+                // up adjacent
+                int upRow = curr.row;
+                int upCol = curr.col + 1;
+                if ((upRow >= 0 && upRow < n) && (upCol >= 0 && upCol < m)) {
+                    if (mat[upRow][upCol] == 1) {
+                        queue.add(new Coordinate(upRow, upCol));
+                        mat[upRow][upCol] = 2;
+                        isSomeFreshRotten = true;
+                    }
+                }
+                // down adjacent
+                int downRow = curr.row;
+                int downCol = curr.col - 1;
+                if ((downRow >= 0 && downRow < n) && (downCol >= 0 && downCol < m)) {
+                    if (mat[downRow][downCol] == 1) {
+                        queue.add(new Coordinate(downRow, downCol));
+                        mat[downRow][downCol] = 2;
+                        isSomeFreshRotten = true;
+                    }
+                }
+            }
+            // if there is some oranges rotten in this time unit,
+            // increment time else end the BFS here
+            if (isSomeFreshRotten)
+                time++;
+            else
+                break;
+        }
+        // check if there is some fresh oranges in the matrix, if yes return -1
+        // otherwise return time
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == 1)
+                    return -1;
+            }
+        }
+        return time;
+    }
+    public static void main(String[] args) {
+        // Example 1
+        int mat1[][] = new int[][]{
+                {0, 1, 1},
+                {2, 1, 2},
+                {1, 0, 1}
+        };
+        System.out.println(minTimeToRot(mat1));
+        // Example 2
+        int mat2[][] = new int[][] {
+                {0, 1, 0},
+                {2, 0, 2},
+                {1, 1, 1},
+                {1, 1, 1}
+        };
+        System.out.println(minTimeToRot(mat2));
+    }
+    // class representing a coordinate in the matrix
+    static class Coordinate {
+        int row;
+        int col;
+        public Coordinate(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+    }
+}
+2
+-1
+
+Complexity Analysis
+Time Complexity
+O(n * m), because we have used breadth First Search which will traverse all the cells in the input matrix. Thus the time complexity is polynomial.
+
+Space Complexity
+O(n * m), using BFS takes this space. Because makes use of queue which stores the elements and thus this complexity.
+
+Where n and m are the rows and columns of the given matrix respectively.
+
