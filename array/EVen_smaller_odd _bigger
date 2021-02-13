@@ -1,0 +1,37 @@
+// Java program to rearrange the array 
+// as per the given condition 
+import java.util.*; 
+import java.lang.*; 
+
+public class GfG{ 
+	// function to rearrange the array 
+	public static void rearrangeArr(int arr[], 
+										int n) 
+	{ 
+	 
+
+	  int[] tempArr = new int [n]; 
+      int i = 0; int j=n-1;
+      int k =n-1;
+       while(i<j){
+        tempArr[k]=arr[i];
+        k--;i++;
+        tempArr[k]=arr[j];
+        k--;j--;
+      }
+      tempArr[k] = arr[i];
+for(k=0;k<n;k++){
+  System.out.print(tempArr[k] + " ");
+    }
+    }
+	// Driver function 
+	public static void main(String argc[]){ 
+		int[] arr = new int []{ 1, 2, 3, 4, 5, 
+										6, 7 }; 
+		int size = 7; 
+		rearrangeArr(arr, size); 
+		
+	} 
+} 
+
+/* This code is contributed by Sagar Shukla */
