@@ -1,0 +1,39 @@
+class sneha{
+	static int NO_OF_CHARS = 256;
+static boolean arePermutation(char str1[], char str2[]) 
+{ 
+	
+	
+	int count[] = new int[NO_OF_CHARS]; 
+	int i; 
+	if (str1.length != str2.length) 
+	return false; 
+	
+	for (i = 0; i<str1.length; i++) 
+	{ 
+		count[str1[i]]++; 
+		count[str2[i]]--; 
+	} 
+	
+	
+	
+	
+	// See if there is any non-zero value in 
+	// count array 
+	for (i = 0; i < NO_OF_CHARS; i++) 
+		if (count[i] != 0) 
+			return false; 
+	return true; 
+}
+
+public static void main(String args[])
+{
+	char str1[] = ("geeksforgeeks").toCharArray();
+	char str2[] = ("Forgeeksgeeks").toCharArray();
+	 
+	if ( arePermutation(str1, str2) )
+		System.out.println("Yes");
+	else
+		System.out.println("No");
+}
+}
