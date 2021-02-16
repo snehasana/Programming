@@ -1,0 +1,40 @@
+
+import java.util.*;
+
+class GfG {
+	boolean uniqueCharacters(String str)
+	{
+		// Assuming string can have characters a-z
+		// this has 32 bits set to 0
+		int checker = 0;
+
+		for (int i = 0; i < str.length(); i++) {
+			int bitAtIndex = str.charAt(i) - 'a';
+			int x = 1<< bitAtIndex;
+int valv = checker&(1<< bitAtIndex);
+			
+			if ((checker & (1 << bitAtIndex)) > 0)
+				return false;
+
+			// otherwise update and continue by
+			// setting that bit in the checker
+			checker = checker | (1 << bitAtIndex);
+		}
+
+		return true;
+	}
+
+	// Driver Code
+	public static void main(String args[])
+	{
+		GfG obj = new GfG();
+		String input = "GeekforGeeks";
+
+		if (obj.uniqueCharacters(input))
+			System.out.println("The String " + input
+							+ " has all unique characters");
+		else
+			System.out.println("The String " + input
+							+ " has duplicate characters");
+	}
+}
