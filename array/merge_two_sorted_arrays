@@ -1,0 +1,53 @@
+import java.util.Arrays;
+import java.io.*;
+
+class solutio{
+    
+    public static int[] mergeArrays(int[] myArray, int[] alicesArray){
+
+        // combine the sorted arrays into one large sorted array
+        
+        if(myArray.length+alicesArray.length == 0)
+        return myArray;
+        else if(myArray.length==1 && alicesArray.length==0)
+        return myArray;
+        else if(alicesArray.length==1&& myArray.length==0)
+        return alicesArray;
+        else{
+        
+        int[] merged = new int[myArray.length+alicesArray.length];
+        
+        int i=0 ,j=0,k=0;
+        while(i<myArray.length&&j<alicesArray.length){
+            if( myArray[i]<alicesArray[j])
+            merged[k++]=myArray[i++];
+            else
+            merged[k++]=alicesArray[j++];
+        }
+        while(i!=myArray.length)
+            merged[k++] = myArray[i++];
+            
+            while(j!=alicesArray.length)
+            merged[k++]=alicesArray[j++];
+            return merged;
+            
+        }
+
+    }
+
+    public static void main (String[] args) 
+    {
+        int[] myArray = {};
+       // int n1 = arr1.length;
+     
+        int[] alicesArray = {};
+       // int n2 = a.length;
+     
+      //  int[] arr3 = new int[n1+n2];
+         
+        
+     
+        System.out.println(java.util.Arrays.toString(mergeArrays(myArray,alicesArray)));
+    }
+}
+    //This code is contributed by Sneha sana
