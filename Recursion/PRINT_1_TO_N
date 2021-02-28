@@ -1,0 +1,55 @@
+//1 to n
+import java.util.Scanner;
+class Recursion{
+    static void  printN(int n) {
+        if(n==0)
+         return;
+        
+        printN(n-1);
+        System.out.print(n+ " ");
+        
+    }
+
+
+
+
+
+
+    public static void main(String [] args){
+         Scanner s = new Scanner(System.in);
+         int n = s.nextInt();
+        printN(n);
+
+    }
+
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//print n to 1
+import java.util.Scanner;
+class Recursion{
+    static void  printN(int n) {
+        if(n==0)
+         return;
+          System.out.print(n+ " ");
+        printN(n-1);
+      
+        
+    }
+
+
+
+
+
+
+    public static void main(String [] args){
+         Scanner s = new Scanner(System.in);
+         int n = s.nextInt();
+        printN(n);
+
+    }
+
+
+}
