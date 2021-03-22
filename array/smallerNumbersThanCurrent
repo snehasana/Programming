@@ -1,0 +1,44 @@
+import java.util.*;
+import java.io.*;
+class subsum{
+    
+    public static int[] smallerNumbersThanCurrent(int[] nums) {
+      int size = nums.length;
+
+	Map<Integer, List<Integer>> map = new HashMap<>();
+
+	// O(n)
+	for (int i = 0; i < size; i++)
+		if (map.containsKey(nums[i]))
+			map.get(nums[i]).add(i);
+		else
+			map.put(nums[i], new ArrayList<>(Arrays.asList(i)));
+
+    // O(nlgn)
+	Arrays.sort(nums);
+	
+	// O(n)
+	int[] count = new int[size];
+	for (int i = 0; i < size;) {
+		int j = i;
+		for (int index : map.get(nums[i])) {
+			count[index] = j;
+			i++;
+		}
+	}
+	return count;
+}
+
+
+//MAIN FUNCTION
+
+
+    public static void main(String []args){
+        int[] arr= { 1,1,2,4,5,8,6,1};
+      int [] a = new int [arr.length];
+     a = smallerNumbersThanCurrent(arr);
+	 System.out.print(Arrays.toString(a));
+    }
+
+    
+}
